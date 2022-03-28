@@ -1,7 +1,7 @@
 import { React, Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {  Col } from 'antd';
-import { Form, Input, Button, Checkbox,} from 'antd';
+import { Form, Input, Button,} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import logo from '../logo.png';
@@ -37,6 +37,7 @@ class Signin extends Component {
                 }}
                 onFinish = {(values) => validateUser(values)}
             >
+                <h2>Sign In</h2>
                 <Form.Item
                     name="username"
                     rules={[
@@ -67,23 +68,19 @@ class Signin extends Component {
                     />
                 </Form.Item>
 
-                <Form.Item name="remember" valuePropName="checked" noStyle>
+                {/* <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-
-                <Form.Item style = {{paddingTop: "10px", marginBottom: "10px" }}>
-                    <Button type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
-                        Sign In
-                    </Button>
-                </Form.Item>
-
-                {/* <Form.Item>
-                    <Button type="default" shape="round" className="login-form-button" size="large">
-                        <Link to= "/signup">
-                            Sign Up
-                        </Link>
-                    </Button>
                 </Form.Item> */}
+
+                <Button style={{marginBottom: "10px" }} type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
+                    Sign In
+                </Button>
+                <br></br>
+                <Button style={{marginBottom: "10px" }} type="default" shape="round" className="login-form-button" size="large">
+                    <Link to= "/signup">
+                        Sign Up
+                    </Link>
+                </Button>
             </Form>
         
         </StyledCol>
@@ -97,7 +94,7 @@ class Signin extends Component {
 
 export default connect(state => ({
     // props
-    valid: state.validateUser.valid,
+    valid: state.userValidation.valid,
 }), {
     // actions
     validateUser

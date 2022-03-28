@@ -5,7 +5,7 @@ const initialStateUser ={
     valid: false,
 }
 
-export const validateUser = (state=initialStateUser, action={}) => {
+export const userValidation = (state=initialStateUser, action={}) => {
     console.log("in reducers.js and action is", action)
     switch (action.type){
         case VALID_USER:

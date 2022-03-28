@@ -49,5 +49,27 @@ def get_user(username):
     except:
         return "User not found"
 
+# create user
+@app.route('/users', methods=['POST'])
+def create_user():
+    # an example of how request.json looks like:
+    # {'userInput': 
+    #   {'username': 'marcus', 
+    #    'password': 'password', 
+    #    'passwordConfirm': 'password'
+    #   }
+    # }
+    userInput = request.json['userInput']
+
+    username = userInput['username']
+    password = userInput['password']
+    user = User(username, password)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return format_user(user)
+
+
 if __name__ == '__main__':
     app.run()

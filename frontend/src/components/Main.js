@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-export class Main extends Component {
+class Main extends Component {
   render() {
-    return (
-      <h1>MAIN PAGE</h1>
-    )
+      const {
+          username
+      } = this.props
+
+        return (
+        <h1>HELLO {username}</h1>
+        )
   }
 }
 
-export default Main
+export default connect(state => ({
+    // props
+    username: state.userValidation.username,
+}), {
+    // actions
+    // validateUser
+})(Main);
