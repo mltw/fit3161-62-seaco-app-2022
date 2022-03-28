@@ -30,18 +30,8 @@ exit() # or Ctrl+Z
 ```
 <hr>
 
-> 2. Adding a temp user in pgadmin:
 
-Launch PGAdmin, locate to your db and you'll see a "user" table. Add a dummy user,
-
-eg **id**: 1, **username**: user, **password**: password, **created_at**: 2022-03-21 07:29:38.60022. (Remember to save the data in pgadmin)
-
-Use this username and password to login the web app for now.
-
-
-<hr>
-
-> 3. Setting up frontend (installing packages):
+> 2. Setting up frontend (installing packages):
 
 In a new terminal,  
 ```
@@ -54,7 +44,7 @@ npm install styled-components
 ```
 <hr>
 
-> 4. Launching the development server:
+> 3. Launching the development server:
 
 In backend directory, `flask run`
 
