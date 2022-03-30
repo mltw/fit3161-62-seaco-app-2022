@@ -18,5 +18,9 @@ const StyledCol = styled(Col)`
                 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
     borderRadius: 5px
 `
-
-export { StyledRow, StyledCol }
+const StyledDivMainPage = styled.div`
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+`
+export { StyledRow, StyledCol, StyledDivMainPage }
