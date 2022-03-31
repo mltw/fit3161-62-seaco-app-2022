@@ -17,6 +17,7 @@ class User(db.Model):
     username = db.Column(db.String(100), nullable=False) #db.String(max char allowed)
     password = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    session_token = db.Column(db.String(200), nullable=True)
 
     # string representation of itself
     def __repr__(self) -> str:
@@ -33,6 +34,7 @@ def format_user(user):
         "username": user.username,
         "password": user.password,
         "created_at": user.created_at,
+        "session_token": user.session_token,
     }
 
 @app.route('/') # this row is called a decorator
@@ -69,6 +71,20 @@ def create_user():
     db.session.commit()
 
     return format_user(user)
+
+# update an event
+@app.route('/users/<username>/session-token', methods=['PUT'])
+def update_token(username):
+    try:
+        user = User.query.filter_by(username=username)
+        session_token_req = request.json['session_token']
+        user.update(dict(session_token = session_token_req,))
+        db.session.commit()
+
+        formatted_user = format_user(user.one())
+        return {'User': formatted_user}
+    except:
+        return "Error in updating session token"
 
 
 if __name__ == '__main__':
