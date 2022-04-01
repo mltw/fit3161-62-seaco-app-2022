@@ -1,23 +1,22 @@
 import { React, Component } from 'react';
 import { Link } from 'react-router-dom';
-import {  Col } from 'antd';
-import { Form, Input, Button,} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {  Col, Tooltip } from 'antd';
+import { Form, Input, Button } from 'antd';
+import { MailOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import logo from '../logo.png';
 import { StyledRow, StyledCol } from './Styled';
 import { connect } from 'react-redux';
-import { registerAndValidateUser} from '../actions';
+import { registerUserTemp} from '../actions';
 
-class Signup extends Component {
+class SignupTemp extends Component {
 
   render() {
 
     const {
-        registerAndValidateUser
+        registerUserTemp
     } = this.props
 
-    console.log("rendering signin and valid from props is", this.props.valid)
     return (
         <StyledRow type="flex" justify="center" align="middle">
         <Col xs={2} sm={4} md={6} lg={6} xl={7}></Col>
@@ -37,65 +36,38 @@ class Signup extends Component {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish = {(values) => registerAndValidateUser(values)}
+                onFinish = {(values) => registerUserTemp(values)}
             >
                 <h2>Sign Up</h2>
                 <Form.Item
-                    // label = "Username"
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Email!',
                         },
+                        {
+                            pattern :/^[\w-.]+@(student\.)?(monash\.edu)$/,
+                            message: "Please use your Monash email."
+                        }
                     ]}>
                     <Input 
-                        prefix={<UserOutlined className="site-form-item-icon" />} 
-                        placeholder="Username" />
+                        
+                        prefix={<MailOutlined className="site-form-item-icon" />} 
+                        placeholder="Monash Email" />
                 </Form.Item>
 
-                <Form.Item
-                    // label = "Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                        { min: 8, message: 'Password is a minimum of 8 characters.' }
-                    ]}
-                >
-                    <Input
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="Password"
-                    />
-                </Form.Item>
-
-                <Form.Item
-                    // label = "Confirm Password"
-                    name="passwordConfirm"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please confirm your password!',
-                        },
-                        { min: 8, message: 'Password is a minimum of 8 characters.' }
-                    ]}
-                >
-                    <Input
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="Confirm Password"
-                    />
-                </Form.Item>
+                
 
                 {/* <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item> */}
 
                 <Button style={{marginBottom: "10px" }} type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
-                    Sign Up
+                    Request for code 
+                    <Tooltip title="An email will be sent to you once Mr X approves the registration. Kindly follow the steps there to complete the sign up process.">
+                        <InfoCircleOutlined style={{fontSize: "17px"}}/>
+                    </Tooltip>
                 </Button>
                 <br></br>
                 <Button style={{marginBottom: "10px" }} type="default" shape="round" className="login-form-button" size="large">
@@ -119,5 +91,5 @@ export default connect(state => ({
     valid: state.userValidation.valid,
 }), {
     // actions
-    registerAndValidateUser
-})(Signup);
+    registerUserTemp
+})(SignupTemp);

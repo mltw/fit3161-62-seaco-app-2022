@@ -2,7 +2,7 @@ import { React, Component } from 'react';
 import { Link } from 'react-router-dom';
 import {  Col } from 'antd';
 import { Form, Input, Button,} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import logo from '../logo.png';
 import { StyledRow, StyledCol } from './Styled';
@@ -39,16 +39,20 @@ class Signin extends Component {
             >
                 <h2>Sign In</h2>
                 <Form.Item
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Email!',
                         },
+                        {
+                            pattern :/^[\w-.]+@(student\.)?(monash\.edu)$/,
+                            message: "Please use your Monash email."
+                        }
                     ]}>
                     <Input 
-                        prefix={<UserOutlined className="site-form-item-icon" />} 
-                        placeholder="Username" />
+                        prefix={<MailOutlined className="site-form-item-icon" />} 
+                        placeholder="Email" />
                 </Form.Item>
 
                 <Form.Item
@@ -61,7 +65,7 @@ class Signin extends Component {
                         { min: 8, message: 'Password is a minimum of 8 characters.' }
                     ]}
                 >
-                    <Input
+                    <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"

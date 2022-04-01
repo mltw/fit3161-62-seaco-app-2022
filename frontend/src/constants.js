@@ -1,2 +1,4 @@
 export const VALID_USER = 'VALID_USER'
 export const INVALID_USER = 'INVALID_USER'
+export const SEND_SUCCESSFUL = 'SEND_SUCCESSFUL'
+export const SEND_FAILED = 'SEND_FAILED'
