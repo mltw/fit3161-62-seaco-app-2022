@@ -1,6 +1,11 @@
-import { VALID_USER, INVALID_USER, SEND_FAILED, SEND_SUCCESSFUL } from "./constants";
+import { 
+    VALID_USER, INVALID_USER, 
+    SEND_SUCCESSFUL, SEND_FAILED,
+    RETRIEVE_EMAIL_SUCCESSFUL, RETRIEVE_EMAIL_FAILED,     
+} 
+from "./constants";
 import axios from "axios";
-import { message } from "antd";
+import { message, Modal } from "antd";
 import { v4 as uuidv4 } from 'uuid'
 
 const baseUrl = "http://localhost:5000"
@@ -63,13 +68,8 @@ export const registerAndValidateUser = (userInput) => async (dispatch) => {
         const data = await axios.get(`${baseUrl}/users/${userInput.email}`)
         const dataCode = await axios.get(`${baseUrl}/users/signup/${userInput.email}`)
 
-        // if (!data.data.User){
-        //     throw Error
-        // }
-
         // in UserTemp table, if there's no such email, it means it hasn't been registered
         if (!dataCode.data.UserTemp){
-            console.log("sheesh", dataCode)
             dispatch({type: INVALID_USER, email: userInput.email});
             message.error("This email is not registered.")
         }
@@ -137,8 +137,21 @@ export const registerUserTemp = (userInput) => async (dispatch)  => {
     catch (e) {
         // no such user with the email, we can safely register this user
         try{
-            await axios.post(`${baseUrl}/users/signup`, {userInput})
-            message.success("Code requested successfully.")
+            const emailId = uuidv4().toString()
+            message.loading("Processing...", 0)
+            await axios.post(`${baseUrl}/users/signup`, {userInput, emailId: emailId})
+            console.log("Code requested successfully.")
+            message.destroy()
+            Modal.success({
+                title: 'Code requested successfully.',
+                content: (
+                  <div>
+                    Once Mr X approves your request, an email will be sent to you. Kindly follow the
+                    steps there to complete the registration process.
+                  </div>
+                ),
+                onOk() {},
+              });
         }
         catch (e){
             console.log("Error in creating temp user", e)
@@ -161,13 +174,36 @@ export const signOutUser = () => async (dispatch) => {
     }
 }
 
+export const verifyRegisterLink = (emailId) => async (dispatch) => {
+    try{
+        const data = await axios.get(`${baseUrl}/users/signup/${emailId}/id`, emailId)
+        const tempUser = data.data.UserTemp
+
+        if(tempUser){
+            dispatch ({
+                type: RETRIEVE_EMAIL_SUCCESSFUL,
+                email: tempUser.email
+            })
+        }
+        else    
+            throw Error
+    }
+    catch (e){
+        console.log("Can't retrieve email with given email ID.")
+        dispatch ({
+            type: RETRIEVE_EMAIL_FAILED,
+        })
+    }
+}
+
 // used when the page to approve an applicant's registration is loaded
-export const fetchCodeAndSendEmail = (email) => async (dispatch) => {
+export const fetchCodeAndSendEmail = (emailId) => async (dispatch) => {
     try {
-        const data = await axios.get(`${baseUrl}/users/signup/${email}/send`, email)
-        console.log("Email sent")
-        if (data)
-            dispatch({type: SEND_SUCCESSFUL})
+        const data = await axios.get(`${baseUrl}/users/signup/${emailId}/send`, emailId)
+        // console.log("Email sent")
+        if (data.data.UserTemp)
+            dispatch({type: SEND_SUCCESSFUL, email: data.data.UserTemp.email})
+        console.log("Email sent", data)
     }
     catch (e){
         console.log("Error in fetching code and sending email", e)

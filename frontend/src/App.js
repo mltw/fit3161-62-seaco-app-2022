@@ -3,7 +3,8 @@ import Signin from './components/Signin';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Main from './components/Main';
 import { connect } from 'react-redux';
-import { validateUser, registerAndValidateUser, registerUserTemp, signOutUser, fetchCodeAndSendEmail } from './actions';
+import { validateUser, registerAndValidateUser, registerUserTemp, 
+    signOutUser, fetchCodeAndSendEmail, verifyRegisterLink } from './actions';
 import SignupVerified from './components/SignupVerified';
 import SignupTemp from './components/SignupTemp';
 import SuccessMsg from './components/SuccessMsg';
@@ -15,7 +16,9 @@ const mapStateToProps = (state) => {
       username: state.userValidation.username,
       email: state.userValidation.email,
       sessionToken: state.userValidation.sessionToken,
-      emailSentToUser: state.sendEmailValidation.emailSentToUser,
+
+      emailSentToUser: state.userRegistration.emailSentToUser,
+      userSignUpEmail: state.userRegistration.userSignUpEmail,
     }
   }
 
@@ -27,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
       registerUserTemp: (userInput) => dispatch(registerUserTemp(userInput)),
       signOutUser: () => dispatch(signOutUser()),
       fetchCodeAndSendEmail: (email) => dispatch(fetchCodeAndSendEmail(email)),
+      verifyRegisterLink: (emailId) => dispatch(verifyRegisterLink(emailId))
     }
   }
 

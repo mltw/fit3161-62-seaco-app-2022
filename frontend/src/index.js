@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { userValidation, sendEmailValidation } from './reducers'
+import { userValidation, userRegistration } from './reducers'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ThunkMiddleware from 'redux-thunk';
 
 
-const rootReducer = combineReducers({userValidation, sendEmailValidation});
+const rootReducer = combineReducers({userValidation, userRegistration});
 
 const store = createStore(rootReducer, applyMiddleware(ThunkMiddleware));
 

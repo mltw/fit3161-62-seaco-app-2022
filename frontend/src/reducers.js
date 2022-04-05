@@ -1,4 +1,9 @@
-import { VALID_USER, INVALID_USER, SEND_SUCCESSFUL, SEND_FAILED } from "./constants";
+import { 
+    VALID_USER, INVALID_USER, 
+    SEND_SUCCESSFUL, SEND_FAILED,
+    RETRIEVE_EMAIL_SUCCESSFUL, RETRIEVE_EMAIL_FAILED,     
+} 
+from "./constants";
 
 const initialStateUser ={
     username: "",
@@ -9,6 +14,7 @@ const initialStateUser ={
 
 const initialStateEmail ={
     emailSentToUser: false,
+    userSignUpEmail: "",
 }
 
 export const userValidation = (state=initialStateUser, action={}) => {
@@ -26,12 +32,16 @@ export const userValidation = (state=initialStateUser, action={}) => {
     }
 }
 
-export const sendEmailValidation = (state=initialStateEmail, action={}) => {
+export const userRegistration = (state=initialStateEmail, action={}) => {
     switch (action.type){
         case SEND_SUCCESSFUL:
-            return {...state, emailSentToUser: true}
+            return {...state, emailSentToUser: true, userSignUpEmail: action.email}
         case SEND_FAILED:
             return {...state, emailSentToUser: false}
+        case RETRIEVE_EMAIL_SUCCESSFUL:
+            return {...state, userSignUpEmail: action.email}
+        case RETRIEVE_EMAIL_FAILED:
+            return {...state, userSignUpEmail: ""}
         default:
             return state
     }

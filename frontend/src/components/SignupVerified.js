@@ -1,23 +1,54 @@
 import { React, Component } from 'react';
 import {  Col } from 'antd';
-import { Form, Input, Button,} from 'antd';
+import { Form, Input, Button, Result } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import logo from '../logo.png';
 import { StyledRow, StyledCol } from './Styled';
 import { connect } from 'react-redux';
-import { registerAndValidateUser} from '../actions';
+import { registerAndValidateUser, verifyRegisterLink } from '../actions';
 
 let params = new URLSearchParams(document.location.search);
-const email = params.get("email"); 
+const emailId = params.get("id"); 
 
 class SignupVerified extends Component {
+
+    componentDidUpdate(prevProps){
+        const {
+            userSignUpEmail
+        } = this.props
+
+        if (prevProps.userSignUpEmail==="" && userSignUpEmail!==""){
+            this.setState({email: userSignUpEmail})
+        }
+    }
+
+    componentDidMount(){
+        const {
+            verifyRegisterLink,
+            userSignUpEmail
+        } = this.props
+
+        if (!userSignUpEmail)
+            verifyRegisterLink(emailId)
+    }
 
   render() {
 
     const {
-        registerAndValidateUser
+        registerAndValidateUser,
+        userSignUpEmail
     } = this.props
+
+    if(!userSignUpEmail){
+        return (
+            <Result
+                status="404"
+                title="404"
+                subTitle="Sorry, the page you visited does not exist."
+            />
+        )
+    }
 
     return (
         <StyledRow type="flex" justify="center" align="middle">
@@ -44,7 +75,7 @@ class SignupVerified extends Component {
                 <Form.Item
                     // label = "Username"
                     name="email"
-                    initialValue={email}
+                    initialValue={userSignUpEmail}
                     rules={[
                         {
                             required: true,
@@ -56,7 +87,7 @@ class SignupVerified extends Component {
                         }
                     ]}>
                     <Input 
-                        disabled={email ? true : false}
+                        disabled={userSignUpEmail ? true : false}
                         prefix={<MailOutlined className="site-form-item-icon" />} 
                         placeholder="Monash Email" />
                 </Form.Item>
@@ -153,7 +184,9 @@ class SignupVerified extends Component {
 export default connect(state => ({
     // props
     valid: state.userValidation.valid,
+    userSignUpEmail: state.userRegistration.userSignUpEmail,
 }), {
     // actions
-    registerAndValidateUser
+    registerAndValidateUser,
+    verifyRegisterLink,
 })(SignupVerified);

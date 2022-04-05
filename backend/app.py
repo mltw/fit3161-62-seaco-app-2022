@@ -47,15 +47,15 @@ class UserTemp(db.Model):
     # create a column using db.Column()
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
+    email_id = db.Column(db.String)
     code = db.Column(db.Integer)
-    # session_token = db.Column(db.String(200), nullable=True)
 
-    # string representation of itself
     def __repr__(self) -> str:
         return f"Email: {self.email}"
 
-    def __init__(self, email, code) -> None:
+    def __init__(self, email, email_id, code) -> None:
         self.email = email
+        self.email_id = email_id
         self.code = code
 
 def format_user(user):
@@ -71,6 +71,7 @@ def format_user(user):
 def format_temp_user(temp_user):
     return {
         "email": temp_user.email,
+        "email_id": temp_user.email_id,
         "code": temp_user.code,
     }
 
@@ -81,9 +82,9 @@ def hello():
     msg = Message(
         'SEACO Web app registration', 
         sender ='seaco2022ma16@gmail.com', 
-        recipients = ['mlim0032@student.monash.edu'])
+        recipients = ['seaco2022ma16@gmail.com'])
     msg.html=f"A staff with email: {email} has signed up for an account. <br></br> \
-                <button><a href='http://localhost:3000/approve/?email=bla@gmail.com'>Click this button to approve.</a></button>"
+                <button><a href='http://localhost:3000/approve/?id=bla@gmail.com'>Click this button to approve.</a></button>"
     mail.send(msg)
     return "Message sent!"
 
@@ -95,13 +96,14 @@ def create_temp_user():
     #   {'username': 'marcus', 
     #    'password': 'password', 
     #    'passwordConfirm': 'password'
-    #   }
+    #   },
+    #  'emailId' : 'xxxxx'
     # }
     userInput = request.json['userInput']
-
     email = userInput['email']
-    code = randint(100000, 999999) 
-    temp_user = UserTemp(email, code)
+    email_id = request.json['emailId'] # get the random generated id from front-end
+    code = randint(100000, 999999) # generate a random 6 digit verification code 
+    temp_user = UserTemp(email, email_id, code)
 
     db.session.add(temp_user)
     db.session.commit()
@@ -109,21 +111,30 @@ def create_temp_user():
     msg = Message(
         'SEACO Web app registration', 
         sender ='marcus.limtauwhang961@gmail.com', 
-        recipients = ['mlim0032@student.monash.edu'])
+        recipients = ['seaco2022ma16@gmail.com'])
     msg.html=f"A staff with email: {email} has signed up for an account. <br></br> \
-                <button><a href=`http://localhost:3000/signup/verified/?email={email}`>Click this button to approve.</a></button>"
+                <button><a href=`http://localhost:3000/approve/?id={email_id}`>Click this button to approve.</a></button>"
     mail.send(msg)
 
     return {"UserTemp": format_temp_user(temp_user)}
 
 # get temporary user
 @app.route('/users/signup/<email>', methods=['GET'])
-def get_temp_user(email):
+def get_temp_user_by_email(email):
     try:
         temp_user = UserTemp.query.filter_by(email=email).first_or_404("No such user with email: {}".format(email))
         return {"UserTemp": format_temp_user(temp_user)}
     except:
         return "No such user with this email"
+
+# get temporary user by email_id
+@app.route('/users/signup/<email_id>/id', methods=['GET'])
+def get_temp_user_by_email_id(email_id):
+    try:
+        temp_user = UserTemp.query.filter_by(email_id=email_id).first_or_404("No such user with email id: {}".format(email_id))
+        return {"UserTemp": format_temp_user(temp_user)}
+    except:
+        return "No such user with this email ID"
 
 # get single user
 @app.route('/users/<email>', methods=['GET'])
@@ -172,24 +183,34 @@ def update_token(email):
         return "Error in updating session token"
 
 # fetch code and send email to the applicant
-@app.route('/users/signup/<email>/send', methods=['GET'])
-def fetch_code_and_send_email(email):
+@app.route('/users/signup/<email_id>/send', methods=['GET'])
+def fetch_code_and_send_email(email_id):
     try:
-        temp_user = UserTemp.query.filter_by(email=email).first_or_404("No such user {}".format(email))
+        temp_user = UserTemp.query.filter_by(email_id=email_id).first_or_404("No such user {}".format(email_id))
         code = temp_user.code
+ 
+        # temp_user = UserTemp(email, email_id, code)
 
         msg = Message(
-            'Complete your SEACO Web app registration', 
+            'Complete your SEACO Web App Registration', 
             sender ='seaco2022ma16@gmail.com', 
             recipients = ['mlim0032@student.monash.edu'])
         msg.html=f"Your registration is approved.<br></br> \
-                    Your verification code is {code}. Please \
-                    <button><a href=`http://localhost:3000/signup/verified/?email={email}`>click here</a></button> to complete your registration."
+                    Your verification code is <b>{code}</b>. Please \
+                    <button><a href=`http://localhost:3000/signup/verified/?id={email_id}`>click here</a></button> to complete your registration."
         mail.send(msg)
-        return "Message sent"
+        return {"UserTemp": format_temp_user(temp_user)}
     except:
         return "Error in fetching code and sending emai"
 
+# delete an event (not used for now)
+@app.route('/users/signup/<email_id>', methods=['DELETE'])
+def delete_temp_user(email_id):
+    tempUser = UserTemp.query.filter_by(email_id=email_id).one()
+    db.session.delete(tempUser)
+    db.session.commit()
+
+    return f'Temp user {tempUser.email} deleted'
 
 if __name__ == '__main__':
     app.run(debug = True)
