@@ -6,7 +6,10 @@ import {
 from "./constants";
 import axios from "axios";
 import { message, Modal } from "antd";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcryptjs';
+
+const salt = bcrypt.genSaltSync(10)
 
 const baseUrl = "http://localhost:5000"
 
@@ -25,6 +28,9 @@ export const validateUser = (userInput) => async (dispatch) => {
         }
         */
         const fetchedUser = data.data.User
+
+        // hash the user input password with its salt
+        const userInputPasswordHashed = bcrypt.hashSync(userInput.password, fetchedUser.salt)
         
         // if userInput's password length>0, it's a new login and not a page refresh, thus create a new sessionToken.
         // otherwise, its a page refresh, get the token saved in local storage
@@ -33,7 +39,7 @@ export const validateUser = (userInput) => async (dispatch) => {
         if (!fetchedUser){
             throw Error
         }
-        else if(fetchedUser.password === userInput.password || fetchedUser.session_token === localStorage.getItem("token")){
+        else if(fetchedUser.password === userInputPasswordHashed || fetchedUser.session_token === localStorage.getItem("token")){
             dispatch({
                 type: VALID_USER, 
                 username: fetchedUser.username,
@@ -85,7 +91,10 @@ export const registerAndValidateUser = (userInput) => async (dispatch) => {
                 if (userInput.password === userInput.passwordConfirm &&
                     fetchedTempUser.code.toString() === userInput.code.toString()
                 ){
-                    await axios.post(`${baseUrl}/users`, {userInput})
+                    // hash the user input password with a newly created salt, save both the hashed pw and the salt into the db
+                    const userInputPasswordHashed = bcrypt.hashSync(userInput.password, salt)
+                    userInput.password = userInputPasswordHashed
+                    await axios.post(`${baseUrl}/users`, {userInput, salt:salt})
     
                     const sessionToken = uuidv4().toString()
                     dispatch({
@@ -146,7 +155,7 @@ export const registerUserTemp = (userInput) => async (dispatch)  => {
                 title: 'Code requested successfully.',
                 content: (
                   <div>
-                    Once Mr X approves your request, an email will be sent to you. Kindly follow the
+                    Once the admin approves your request, an email will be sent to you. Kindly follow the
                     steps there to complete the registration process.
                   </div>
                 ),

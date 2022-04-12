@@ -30,6 +30,8 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False)
     username = db.Column(db.String(100), nullable=False) #db.String(max char allowed)
     password = db.Column(db.String(100), nullable=False)
+    # salt for hashing of pw
+    salt = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     session_token = db.Column(db.String(200), nullable=True)
 
@@ -38,9 +40,10 @@ class User(db.Model):
         # in python, f string allows u to inject python variables into it
         return f"User: {self.username}"
 
-    def __init__(self, username, password, email) -> None:
+    def __init__(self, username, password, salt, email) -> None:
         self.username = username
         self.password = password
+        self.salt = salt
         self.email = email
 
 class UserTemp(db.Model):
@@ -64,6 +67,7 @@ def format_user(user):
         "email": user.email,
         "username": user.username,
         "password": user.password,
+        "salt": user.salt,
         "created_at": user.created_at,
         "session_token": user.session_token,
     }
@@ -157,11 +161,12 @@ def create_user():
     #   }
     # }
     userInput = request.json['userInput']
+    salt = request.json['salt']
 
     username = userInput['username']
-    password = userInput['password']
     email = userInput['email']
-    user = User(username, password, email)
+    password = userInput['password']
+    user = User(username, password, salt, email)
 
     db.session.add(user)
     db.session.commit()
