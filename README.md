@@ -17,7 +17,7 @@ pip install pipenv
 ```
 After running the above 2 commands, find and copy the specified location in the terminal output (eg  C:\Users\User\.virtualenvs\backend-PDWVyg3C). Then, you need to change the interpreter in your code editor. Eg for VS Code, run  **Ctrl+Shift+P**, choose **"Python: Select Interpreter"**, and **paste the copied location**. After that, run:
 ```
-pipenv install flask flask-sqlalchemy psycopg2 python-dotenv flask-cors
+pipenv install flask flask-sqlalchemy psycopg2 python-dotenv flask-cors Flask-Mail Flask-Migrate
 ```
 
 Once you're done, open a new terminal, and run:
@@ -41,6 +41,7 @@ npm install axios date-fns
 npm install antd 
 npm install @ant-design/icons
 npm install styled-components
+npm install tableau-react
 ```
 <hr>
 
