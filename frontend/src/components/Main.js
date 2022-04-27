@@ -11,6 +11,8 @@ import {
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { signOutUser } from '../actions';
+import Tableau from "tableau-react";
+import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCircleUser,  } from '@fortawesome/free-regular-svg-icons';
 // import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
@@ -39,6 +41,11 @@ render() {
         signOutUser
     } = this.props
 
+    const options = {
+        hideTabs: true,
+        hideToolbar: true
+      };
+
     return (
     <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -52,10 +59,12 @@ render() {
             
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                 <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Option 1
+                    Dashboard
                 </Menu.Item>
                 <Menu.Item key="2" icon={<DesktopOutlined />}>
+                    {/* <Link to="/"> */}
                     Option 2
+                    {/* </Link> */}
                 </Menu.Item>
                 <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                     <Menu.Item key="3">Tom</Menu.Item>
@@ -103,8 +112,17 @@ render() {
                     <Breadcrumb.Item>Bill</Breadcrumb.Item>
                 </Breadcrumb> */}
                 <div style={{ padding: 24, minHeight: 360, background: "#fff" }}>
-                Bill is a cat.
+                    <h1>hi</h1>
+                    {/* <div style={{border: "2px solid black"}}> */}
+                    <div>
+                        <Tableau
+                            // url="https://public.tableau.com/shared/XTCDMZ8KF?:display_count=y&:origin=viz_share_link"
+                            url="https://public.tableau.com/views/Book1butmobileviewfullheight/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link"
+                            options={options}
+                        />
+                    </div>
                 </div>
+                
             </Content>
             <Footer style={{ textAlign: 'center' }}>SEACO x Team MA 16</Footer>
         </Layout>
