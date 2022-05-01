@@ -5,7 +5,7 @@
 
 <hr>
 
-> 1. Setting up backend (setting up db config and installing packages):  
+> 1. ⚙️ Setting up backend (setting up db config and installing packages):  
 
 First, go to **backend/app.py** line 9 (app.config[...]) and update with your information:  
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://**USERNAME_IN_PGADMIN**:**PASSWORD**@localhost/**YOUR_DB_NAME**'.
@@ -32,7 +32,7 @@ exit() # or Ctrl+Z
 <hr>
 
 
-> 2. Setting up frontend (installing packages):
+> 2. 💻 Setting up frontend (installing packages):
 
 In a new terminal,  
 ```
@@ -41,7 +41,7 @@ npm install --legacy-peer-deps
 ```
 <hr>
 
-> 3. Launching the development server:
+> 3. 🌐 Launching the development server:
 
 In backend directory, `flask run`
 
