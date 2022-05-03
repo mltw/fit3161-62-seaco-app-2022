@@ -1,18 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
-import { StyledDivMainPage } from './Styled';
+import { Layout, Menu } from 'antd';
+import logo from "../logo.png";
 import {
   DesktopOutlined,
   PieChartOutlined,
-  FileOutlined,
   TeamOutlined,
   UserOutlined,
+  MenuOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { signOutUser } from '../actions';
-import Tableau from "tableau-react";
-import { Link } from 'react-router-dom';
+import { 
+    Link,
+    useParams,
+    Outlet 
+} from 'react-router-dom';
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCircleUser,  } from '@fortawesome/free-regular-svg-icons';
 // import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
@@ -21,68 +25,74 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 
-class Main extends Component {
-state = {
-    collapsed: false,
-};
+function Main(props) {
 
-onCollapse = collapsed => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-};
-
-render() {
-    const { 
-        collapsed 
-    } = this.state;
+    const [collapsed, setCollapsed] = useState(false)
 
     const {
         username,
         signOutUser
-    } = this.props
+    } = props
 
-    const options = {
-        hideTabs: true,
-        hideToolbar: true
-      };
+      const { section } = useParams();
+      console.log("in Main and section is", section)
 
     return (
     <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-        
-            {/* logo */}
-            <StyledDivMainPage 
-                onClick={()=>this.onCollapse(!collapsed)}
-                style={{cursor: "pointer"}}>
-                Click me to collpase
-            </StyledDivMainPage>
+        <Sider 
+            collapsible collapsed={collapsed} 
+            onCollapse={setCollapsed}>
+            <div
+                onClick={()=>{setCollapsed(!collapsed) ;console.log(collapsed)}}
+                style={{margin: "16px", cursor: "pointer", fontSize: '16px', textAlign:"center", color:"white"}}>
+
+                { collapsed ? <MenuOutlined /> : 
+                    <div style={{fontSize: '16px'}}>
+                        <MenuOutlined/> &nbsp;
+                        SEACO, Monash
+                        {/* <img src={logo} alt="Logo" style={{width:"40%", objectFit:"contain"}}/> */}
+                    </div> }
+            </div>
             
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Dashboard
+            <Menu 
+                theme="dark" 
+                defaultSelectedKeys={[section || 'dashboard']} 
+                defaultOpenKeys={section === 'c1' || section === 'c2' ? ['contact'] : []}
+                mode="inline">
+                <Menu.Item key="dashboard" icon={<PieChartOutlined />}>
+                    <Link to="dashboard">
+                        Dashboard
+                    </Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    {/* <Link to="/"> */}
-                    Option 2
-                    {/* </Link> */}
+                <Menu.Item key="qna" icon={<DesktopOutlined />}>
+                    <Link to="qna">
+                        Questions for analysis
+                    </Link>
                 </Menu.Item>
-                <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                    <Menu.Item key="3">Tom</Menu.Item>
-                    <Menu.Item key="4">Bill</Menu.Item>
-                    <Menu.Item key="5">Alex</Menu.Item>
+                <SubMenu key="contact" icon={<TeamOutlined />} title="SEACO Contact">
+                    <Menu.Item key="c1" >
+                        <Link to="c1">
+                            Mohd Roshidi Ismail
+                        </Link>
+                    </Menu.Item>
+                    
+                    <Menu.Item key="c2" >
+                        <Link to="c2">
+                            Norliza Mat
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-                    <Menu.Item key="6">Team 1</Menu.Item>
-                    <Menu.Item key="8">Team 2</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="9" icon={<FileOutlined />}>
-                    Files
-                </Menu.Item>
+
             </Menu>
         </Sider>
+
         <Layout className="site-layout">
             <Header style={{ background: "#fff", padding: 0}}>
-                <Menu mode="horizontal" selectable={false}>
+                <Menu mode="horizontal" selectable={false} style={{height:"64px"}}>
+                    <div>
+                        <img src={logo} alt="Logo" style={{padding: "5px 5px 5px 16px" ,width:"100%", height:"100%" }}/>
+                    </div>
+                    
                     <SubMenu key="sub1" title={username} icon={<UserOutlined style={{fontSize: "22px"}}/>} style={{marginLeft:'auto', fontSize: "15px"}}>
                         <Menu.Item key="1" onClick={signOutUser}>Sign Out</Menu.Item>
                     </SubMenu>
@@ -107,20 +117,9 @@ render() {
                 <h1 style={{margin: "16px 0px"}}>
                     Hello, {username}!
                 </h1>
-                {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Hello, {username} !</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                </Breadcrumb> */}
+
                 <div style={{ padding: 24, minHeight: 360, background: "#fff" }}>
-                    <h1>hi</h1>
-                    {/* <div style={{border: "2px solid black"}}> */}
-                    <div>
-                        <Tableau
-                            // url="https://public.tableau.com/shared/XTCDMZ8KF?:display_count=y&:origin=viz_share_link"
-                            url="https://public.tableau.com/views/Book1butmobileviewfullheight/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link"
-                            options={options}
-                        />
-                    </div>
+                    <Outlet />
                 </div>
                 
             </Content>
@@ -128,7 +127,7 @@ render() {
         </Layout>
     </Layout>
     );
-}
+
 }
 
 export default connect(state => ({
