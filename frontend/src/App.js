@@ -1,5 +1,6 @@
 import './App.css';
 import Signin from './components/Signin';
+import Section from './components/Section';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Main from './components/Main';
 import { connect } from 'react-redux';
@@ -54,10 +55,13 @@ function App(props) {
     return (
             <Router>
                 <Routes>
-                    <Route exact path="/" element={ valid ? <Navigate to={"/home"} /> : <Signin />} />
-                    <Route path="/home" element={ !valid ? <Navigate to={"/"} /> : <Main />} />
-                    <Route path="/signup" element={ valid ? <Navigate to={"/home"} /> : <SignupTemp />} />
-                    <Route path="/signup/verified/*" element={ valid ? <Navigate to={"/home"} /> : <SignupVerified />} />
+                    <Route exact path="/" element={ valid ? <Navigate to={"/main"} /> : <Signin />} />
+                    <Route path="/main" element={ !valid ? <Navigate to={"/"} /> : <Main />}>
+                      <Route path='' exact element={ <Navigate to={"dashboard"} />} />
+                      <Route path=":section" element={<Section />} />
+                    </Route>
+                    <Route path="/signup" element={ valid ? <Navigate to={"/main"} /> : <SignupTemp />} />
+                    <Route path="/signup/verified/*" element={ valid ? <Navigate to={"/main"} /> : <SignupVerified />} />
                     <Route path="approve/*" element={<SuccessMsg />} />
                 </Routes>
             </Router>
