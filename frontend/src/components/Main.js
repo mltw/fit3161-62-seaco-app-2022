@@ -46,7 +46,9 @@ function Main(props) {
                 onClick={()=>{setCollapsed(!collapsed) ;console.log(collapsed)}}
                 style={{margin: "16px", cursor: "pointer", fontSize: '16px', textAlign:"center", color:"white"}}>
 
-                { collapsed ? <MenuOutlined /> : 
+                { collapsed ? 
+                    <MenuOutlined /> 
+                    : 
                     <div style={{fontSize: '16px'}}>
                         <MenuOutlined/> &nbsp;
                         SEACO, Monash
@@ -56,6 +58,7 @@ function Main(props) {
             
             <Menu 
                 theme="dark" 
+                selectedKeys={[section]}
                 defaultSelectedKeys={[section || 'dashboard']} 
                 defaultOpenKeys={section === 'c1' || section === 'c2' ? ['contact'] : []}
                 mode="inline">

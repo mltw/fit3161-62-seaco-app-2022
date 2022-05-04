@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import { Row, Col, } from 'antd';
 import background from '../background.jpg';
 
 const StyledRow = styled(Row)`
@@ -19,4 +19,9 @@ const StyledCol = styled(Col)`
     borderRadius: 5px
 `
 
-export { StyledRow, StyledCol }
+const StyledColCard = styled(Col)`
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    borderRadius: 5px
+`
+
+export { StyledRow, StyledCol, StyledColCard }
