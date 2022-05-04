@@ -1,6 +1,6 @@
 import './App.css';
 import Signin from './components/Signin';
-import Section from './components/Section';
+import Section from './components/MainSections/Section';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Main from './components/Main';
 import { connect } from 'react-redux';
