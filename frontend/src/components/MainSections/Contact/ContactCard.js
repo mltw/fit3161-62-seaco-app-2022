@@ -27,7 +27,8 @@ export default function ContactCard() {
     }
 
     return (
-        <Row justify="space-around" align="middle">
+        // <Row justify="space-around" align="middle">
+        <Row className='contact-card-text'>
             <Col flex="180px">
                 <div style={{textAlign: "center"}}>
                     <img src={img.current} alt="pic" style={{width:"100%", objectFit:"contain"}}/>

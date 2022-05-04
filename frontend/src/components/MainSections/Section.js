@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
-import ContactCard from './ContactCard';
+import ContactCard from './Contact/ContactCard';
 import Dashboard from './Dashboard';
 import QuesAns from './QuesAns';
 
