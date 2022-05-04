@@ -64,7 +64,7 @@ class SignupTemp extends Component {
                 </Form.Item> */}
 
                 <Button style={{marginBottom: "10px" }} type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
-                    Request for code 
+                    Request Registration
                     <Tooltip title="An email will be sent to you once the admin approves the registration. Kindly follow the steps there to complete the sign up process.">
                         <InfoCircleOutlined style={{fontSize: "17px"}}/>
                     </Tooltip>
