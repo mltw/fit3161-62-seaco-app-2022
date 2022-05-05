@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col, Popover, Button, Statistic, Tabs, Card } from 'antd';
 import Tableau from '../Tableau/Tableau';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { StyledColCard } from '../Styled';
+import { StyledCard } from '../Styled';
 // import { PowerBIEmbed } from 'powerbi-client-react';
 // import { models } from 'powerbi-client';
 
@@ -15,7 +15,7 @@ const cardTitle = (
     </>
 )
 
-const ethnicity = (
+const ethnicityInfo = (
     <Tabs defaultActiveKey="1" size='small' tabPosition={'top'}>
         <TabPane tab="1-5" key="1">
             <div>
@@ -36,7 +36,7 @@ const ethnicity = (
     </Tabs>
 )
 
-const education = (
+const educationInfo = (
     <Tabs defaultActiveKey="1" size='small' tabPosition={'top'}>
         <TabPane tab="1-5" key="1">
             <div>
@@ -72,6 +72,8 @@ export default function Dashboard() {
   return (
     <div>
         <h1 style={{textAlign: "center", fontSize: "25px"}}>Health Round Analysis 2013 & 2018</h1>
+        <hr></hr>
+        <br></br>
         {/* <Row className="row" justify="space-between" >
             <Col flex="1 0 25%" className="column Red">
                 Number of participants:
@@ -90,30 +92,32 @@ export default function Dashboard() {
         
         {/* TODO: Make this part responsive */}
         <Row justify="space-around" style={{padding: "0 10px"}}>
-            <StyledColCard span={4}>
-                <Card bordered={false}>
+            <StyledCard bordered={false}>
+                {/* <Card bordered={false}> */}
                     <Statistic title="Total participants:" value={10647} valueStyle={{textAlign:"end"}}/>
-                </Card>
-            </StyledColCard>
+                {/* </Card> */}
+            </StyledCard>
 
-            <StyledColCard span={4}>
-                <Card bordered={false}>
+            <StyledCard bordered={false}>
+                {/* <Card bordered={false}> */}
                     <Statistic title="Average age of participants:" value={44.55} valueStyle={{textAlign:"end"}}/>
-                </Card>
-            </StyledColCard>
+                {/* </Card> */}
+            </StyledCard>
 
-            <StyledColCard span={6}>
-                <Card bordered={false}>
+            <StyledCard bordered={false}>
+                {/* <Card bordered={false}> */}
                     <Statistic title="% of Male/Female/Other:" value={"41.23/58.04/0.01"} valueStyle={{textAlign:"end"}}/>
-                </Card>
-            </StyledColCard>
+                {/* </Card> */}
+            </StyledCard>
 
-            <StyledColCard span={4}>
-                <Card bordered={false}>
+            <StyledCard bordered={false}>
+                {/* <Card bordered={false}> */}
                     <Statistic title="Some other data:" value={123} valueStyle={{textAlign:"end"}}/>
-                </Card>
-            </StyledColCard>
+                {/* </Card> */}
+            </StyledCard>
         </Row>
+        <br></br>
+
         <div style={{textAlign: 'center'}}>
             {/* <Tableau
                 // url="https://public.tableau.com/shared/XTCDMZ8KF?:display_count=y&:origin=viz_share_link"
@@ -130,12 +134,12 @@ export default function Dashboard() {
                 <Col flex={"120px"} style={{marginRight: "10px"}}>
                     <Card size="small" title={cardTitle} hoverable style={{borderWidth: "2px"}} type='inner'>
                         <p>
-                            <Popover content={ethnicity} title="Value / Label" trigger="click" placement='bottomRight'>
+                            <Popover content={ethnicityInfo} title="Value / Label" trigger="click" placement='bottomRight'>
                                 <Button style={{width: "100px"}}>Ethnicity</Button>
                             </Popover>
                         </p>
                         <p>
-                            <Popover content={education} title="Value / Label" trigger="click" placement='bottomRight' >
+                            <Popover content={educationInfo} title="Value / Label" trigger="click" placement='bottomRight' >
                                 <Button style={{width: "100px"}}>Education</Button>
                             </Popover>
                         </p>
