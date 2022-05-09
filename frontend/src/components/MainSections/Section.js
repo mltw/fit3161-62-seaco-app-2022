@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
 import ContactCard from './Contact/ContactCard';
 import Dashboard from './Dashboard';
-import Report from './Report';
+import Report from './Reports/Report';
 import { Result } from 'antd';
 
 function Section() {
