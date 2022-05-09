@@ -1,11 +1,24 @@
 import React from 'react'
 import { Row, Statistic, Card, Col } from 'antd';
 import { StyledCard } from '../Styled';
+import { useParams } from "react-router-dom";
 
-export default function QuesAns() {
+export default function Report() {
+
+  const { subSection } = useParams();
+  console.log("hi", useParams)
+  switch (subSection) {
+    case 'individual':
+        return <div>r1</div>;
+        break;
+
+    default:
+        return <div>Other Sections in qna</div>;;
+}
+
   return (
     <div>
-      <h1 style={{textAlign: "center", fontSize: "25px"}}>Questions for Analysis</h1>
+      <h1 style={{textAlign: "center", fontSize: "25px"}}>Reports</h1>
       <hr></hr>
       <br></br>
       {/* justify="space-around"  */}

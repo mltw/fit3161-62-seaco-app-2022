@@ -1,7 +1,8 @@
 import './App.css';
+import { Button, Result } from 'antd';
 import Signin from './components/Signin';
 import Section from './components/MainSections/Section';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import Main from './components/Main';
 import { connect } from 'react-redux';
 import { validateUser, registerAndValidateUser, registerUserTemp, 
@@ -58,11 +59,22 @@ function App(props) {
                     <Route exact path="/" element={ valid ? <Navigate to={"/main"} /> : <Signin />} />
                     <Route path="/main" element={ !valid ? <Navigate to={"/"} /> : <Main />}>
                       <Route path='' exact element={ <Navigate to={"dashboard"} />} />
-                      <Route path=":section" element={<Section />} />
+                      <Route path=":section" element={<Section />}>
+                        <Route path=':subSection' element={<Section />} />
+                      </Route>
                     </Route>
                     <Route path="/signup" element={ valid ? <Navigate to={"/main"} /> : <SignupTemp />} />
                     <Route path="/signup/verified/*" element={ valid ? <Navigate to={"/main"} /> : <SignupVerified />} />
                     <Route path="approve/*" element={<SuccessMsg />} />
+                    <Route path='*' 
+                           element={
+                              <Result
+                                status="404"
+                                title="404"
+                                subTitle="Sorry, the page you visited does not exist."
+                                extra={<Button type="primary"><Link to="/">Back to Home</Link></Button>}
+                              />} 
+                    />
                 </Routes>
             </Router>
     );

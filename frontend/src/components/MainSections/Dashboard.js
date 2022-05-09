@@ -6,6 +6,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { StyledCard } from '../Styled';
 // import { PowerBIEmbed } from 'powerbi-client-react';
 // import { models } from 'powerbi-client';
+import QueueAnim from 'rc-queue-anim';
 
 const { TabPane } = Tabs;
 
@@ -74,51 +75,33 @@ export default function Dashboard() {
         <h1 style={{textAlign: "center", fontSize: "25px"}}>Health Round Analysis 2013 & 2018</h1>
         <hr></hr>
         <br></br>
-        {/* <Row className="row" justify="space-between" >
-            <Col flex="1 0 25%" className="column Red">
-                Number of participants:
-                <h1 style={{textAlign: "right", fontSize: "20px"}}>
-                    888
-                </h1>
-            </Col>
-            <Col flex="1 0 25%" className="column Green">
-            Average age of participants:
-                <h1 style={{textAlign: "right", fontSize: "20px"}}>
-                    888
-                </h1>
-            </Col>
-            <Col flex="1 0 25%" className="column Blue">Blue</Col>
-        </Row> */}
-        
-        {/* TODO: Make this part responsive */}
-        <Row justify="space-around" style={{padding: "0 10px"}}>
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
+        <QueueAnim 
+            delay={300} 
+            duration={600} 
+            className="queue-simple"> 
+            <Row key="stats" justify="space-around" style={{padding: "0 10px"}}>
+                <StyledCard bordered={false}>
                     <Statistic title="Total participants:" value={10647} valueStyle={{textAlign:"end"}}/>
-                {/* </Card> */}
-            </StyledCard>
+                </StyledCard>
 
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
+                <StyledCard bordered={false}>
                     <Statistic title="Average age of participants:" value={44.55} valueStyle={{textAlign:"end"}}/>
-                {/* </Card> */}
-            </StyledCard>
+                </StyledCard>
 
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
+                <StyledCard bordered={false}>
                     <Statistic title="% of Male/Female/Other:" value={"41.23/58.04/0.01"} valueStyle={{textAlign:"end"}}/>
-                {/* </Card> */}
-            </StyledCard>
+                </StyledCard>
+            </Row>
+        </QueueAnim>
 
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
-                    <Statistic title="Some other data:" value={123} valueStyle={{textAlign:"end"}}/>
-                {/* </Card> */}
-            </StyledCard>
-        </Row>
         <br></br>
-
-        <div style={{textAlign: 'center'}}>
+        
+        <QueueAnim 
+            delay={600} 
+            duration={600} 
+            type='left'
+            className="queue-simple"> 
+            <div key="chart" style={{textAlign: 'center'}}>
             {/* <Tableau
                 // url="https://public.tableau.com/shared/XTCDMZ8KF?:display_count=y&:origin=viz_share_link"
                 url="https://public.tableau.com/views/test-3522-mobile/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
@@ -129,36 +112,36 @@ export default function Dashboard() {
                     width:"1000px",
                 }
             /> */}
-            <br></br>
-            <Row>
-                <Col flex={"120px"} style={{marginRight: "10px"}}>
-                    <Card size="small" title={cardTitle} hoverable style={{borderWidth: "2px"}} type='inner'>
-                        <p>
-                            <Popover content={ethnicityInfo} title="Value / Label" trigger="click" placement='bottomRight'>
-                                <Button style={{width: "100px"}}>Ethnicity</Button>
-                            </Popover>
-                        </p>
-                        <p>
-                            <Popover content={educationInfo} title="Value / Label" trigger="click" placement='bottomRight' >
-                                <Button style={{width: "100px"}}>Education</Button>
-                            </Popover>
-                        </p>
-                    </Card>
-                </Col>
-                <Col flex={"auto"}>
-                    <Tableau
-                        vizUrl="https://public.tableau.com/views/test-3522-mobile/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
-                        height={350}
-                        // width={1000}
-                        toolbar="bottom"
-                        hideTabs="true"
-                        hideToolbar="true"
-                    />
-                </Col>
-            </Row>
+                <br></br>
+                <Row >
+                    <Col flex={"120px"} style={{marginRight: "10px"}}>
+                        <Card size="small" title={cardTitle} hoverable style={{borderWidth: "2px"}} type='inner'>
+                            <p>
+                                <Popover content={ethnicityInfo} title="Value / Label" trigger="click" placement='bottomRight'>
+                                    <Button style={{width: "100px"}}>Ethnicity</Button>
+                                </Popover>
+                            </p>
+                            <p>
+                                <Popover content={educationInfo} title="Value / Label" trigger="click" placement='bottomRight' >
+                                    <Button style={{width: "100px"}}>Education</Button>
+                                </Popover>
+                            </p>
+                        </Card>
+                    </Col>
+                    <Col flex={"auto"}>
+                        <Tableau
+                            vizUrl="https://public.tableau.com/views/test-3522-mobile/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                            height={350}
+                            // width={1000}
+                            toolbar="bottom"
+                            hideTabs="true"
+                            hideToolbar="true"
+                        />
+                    </Col>
+                </Row>
             {/* <PowerBIEmbed
                 embedConfig = {{
-                    type: 'report',   // Supported types: report, dashboard, tile, visual and qna
+                    type: 'report',   // Supported types: report, dashboard, tile, visual and reports
                     id: '<Report Id>',
                     embedUrl: '<Embed Url>',
                     accessToken: '<Access Token>',
@@ -188,7 +171,8 @@ export default function Dashboard() {
                     this.report = embeddedReport;
                 }}
             /> */}
-        </div>
+            </div>
+        </QueueAnim>
     </div>
   )
 }

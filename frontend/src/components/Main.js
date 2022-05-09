@@ -7,7 +7,8 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
-  MenuOutlined
+  MenuOutlined,
+  LineChartOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { signOutUser } from '../actions';
@@ -34,8 +35,16 @@ function Main(props) {
         signOutUser
     } = props
 
-      const { section } = useParams();
-      console.log("in Main and section is", section)
+    const { section, subSection } = useParams();
+
+    let menuOpenKey = [];
+    if (section === 'contacts')
+        menuOpenKey = ['contacts']
+    else if (section === 'reports')
+        menuOpenKey = ['reports']
+
+
+    console.log("in Main and section, subSection is", section, subSection)
 
     return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -58,29 +67,50 @@ function Main(props) {
             
             <Menu 
                 theme="dark" 
-                selectedKeys={[section]}
-                defaultSelectedKeys={[section || 'dashboard']} 
-                defaultOpenKeys={section === 'c1' || section === 'c2' ? ['contact'] : []}
+                selectedKeys={[subSection || section]}
+                defaultSelectedKeys={[subSection || section || 'dashboard']} 
+                defaultOpenKeys={menuOpenKey}
                 mode="inline">
                 <Menu.Item key="dashboard" icon={<PieChartOutlined />}>
                     <Link to="dashboard">
                         Dashboard
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="qna" icon={<DesktopOutlined />}>
-                    <Link to="qna">
-                        Questions for analysis
+
+                {/* <Menu.Item key="reports" icon={<DesktopOutlined />}>
+                    <Link to="reports">
+                        Reports
                     </Link>
-                </Menu.Item>
-                <SubMenu key="contact" icon={<TeamOutlined />} title="SEACO Contact">
+                </Menu.Item> */}
+                <SubMenu key="reports" icon={<LineChartOutlined />} title="Reports">
+                    <Menu.Item key="individual" >
+                        <Link to="reports/individual">
+                            Individual Health
+                        </Link>
+                    </Menu.Item>
+                    
+                    <Menu.Item key="household" >
+                        <Link to="reports/household">
+                            Household Health
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="physical" >
+                        <Link to="reports/physical">
+                            Physical
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+
+                <SubMenu key="contacts" icon={<TeamOutlined />} title="SEACO Contact">
                     <Menu.Item key="c1" >
-                        <Link to="c1">
+                        <Link to="contacts/c1">
                             Mohd Roshidi Ismail
                         </Link>
                     </Menu.Item>
                     
                     <Menu.Item key="c2" >
-                        <Link to="c2">
+                        <Link to="contacts/c2">
                             Norliza Mat
                         </Link>
                     </Menu.Item>

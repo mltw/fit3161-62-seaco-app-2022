@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
 import ContactCard from './Contact/ContactCard';
 import Dashboard from './Dashboard';
-import QuesAns from './QuesAns';
+import Report from './Report';
+import { Result } from 'antd';
 
 function Section() {
 
@@ -12,14 +13,17 @@ function Section() {
     switch (section) {
         case 'dashboard':
             return <Dashboard />
-        case 'qna':
-            return <QuesAns />
-        case 'c1':
-        case 'c2':
+        case 'reports':
+            return <Report />
+        case 'contacts':
             return <ContactCard />
-    
+
         default:
-            return <div>Other Sections</div>;
+            return <Result
+                        status="404"
+                        title="404"
+                        subTitle="Sorry, the page you visited does not exist."
+                    />
     }
 
 }
