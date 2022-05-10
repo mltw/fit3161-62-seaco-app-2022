@@ -4,8 +4,6 @@ import { Row, Col, Popover, Button, Statistic, Tabs, Card } from 'antd';
 import Tableau from '../Tableau/Tableau';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { StyledCard } from '../Styled';
-// import { PowerBIEmbed } from 'powerbi-client-react';
-// import { models } from 'powerbi-client';
 import QueueAnim from 'rc-queue-anim';
 
 const { TabPane } = Tabs;
@@ -72,20 +70,31 @@ export default function Dashboard() {
 
   return (
     <div>
-        <h1 style={{textAlign: "center", fontSize: "25px"}}>Health Round Analysis 2013 & 2018</h1>
-        <hr></hr>
-        <br></br>
         <QueueAnim 
             delay={300} 
             duration={600} 
+            type='left'
             className="queue-simple"> 
+        <h1 key="title" style={{textAlign: "center"}}>Health Round Analysis 2013 & 2018</h1>
+        <h3 key="subtitle" style={{textAlign: "center"}}>Background & Statistics of participants</h3>
+        {/* </QueueAnim> */}
+        <hr key="line"></hr>
+        <br></br>
+        {/* <QueueAnim 
+            delay={300} 
+            duration={600} 
+            className="queue-simple">  */}
             <Row key="stats" justify="space-around" style={{padding: "0 10px"}}>
                 <StyledCard bordered={false}>
-                    <Statistic title="Total participants:" value={10647} valueStyle={{textAlign:"end"}}/>
+                    <Statistic title="Total participants:" value={21292} valueStyle={{textAlign:"end"}}/>
                 </StyledCard>
 
                 <StyledCard bordered={false}>
-                    <Statistic title="Average age of participants:" value={44.55} valueStyle={{textAlign:"end"}}/>
+                    <Statistic title="Total unique participants:" value={10647} valueStyle={{textAlign:"end"}}/>
+                </StyledCard>
+
+                <StyledCard bordered={false}>
+                    <Statistic title="Avg. age of participants in 2013/2018:" value={"42.07/47.03"} valueStyle={{textAlign:"end"}}/>
                 </StyledCard>
 
                 <StyledCard bordered={false}>
@@ -99,21 +108,11 @@ export default function Dashboard() {
         <QueueAnim 
             delay={600} 
             duration={600} 
-            type='left'
+            type='right'
             className="queue-simple"> 
             <div key="chart" style={{textAlign: 'center'}}>
-            {/* <Tableau
-                // url="https://public.tableau.com/shared/XTCDMZ8KF?:display_count=y&:origin=viz_share_link"
-                url="https://public.tableau.com/views/test-3522-mobile/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
-                options={
-                    hideTabs: true,
-                    hideToolbar: true,
-                    height: "320px",
-                    width:"1000px",
-                }
-            /> */}
                 <br></br>
-                <Row >
+                {/* <Row >
                     <Col flex={"120px"} style={{marginRight: "10px"}}>
                         <Card size="small" title={cardTitle} hoverable style={{borderWidth: "2px"}} type='inner'>
                             <p>
@@ -139,39 +138,50 @@ export default function Dashboard() {
                         />
                     </Col>
                 </Row>
-            {/* <PowerBIEmbed
-                embedConfig = {{
-                    type: 'report',   // Supported types: report, dashboard, tile, visual and reports
-                    id: '<Report Id>',
-                    embedUrl: '<Embed Url>',
-                    accessToken: '<Access Token>',
-                    tokenType: models.TokenType.Embed,
-                    settings: {
-                        panes: {
-                            filters: {
-                                expanded: false,
-                                visible: false
-                            }
-                        },
-                        background: models.BackgroundType.Transparent,
-                    }
-                }}
+                <br></br>
+                <br></br> */}
+                
+                {/* <Row justify="space-around" style={{padding: "0 10px"}}> */}
+                <Row >
+                    <Col flex={"auto"} style={{margin: "0 5px"}}>
+                        <Card size="small" title={<div style={{fontSize: "1.2em"}}>Ethnicity</div>} style={{borderWidth: "2px"}} type='inner'>
+                        <Tableau
+                            vizUrl="https://public.tableau.com/views/Dashboard-eth/Eth?:language=en-US&:display_count=n&:origin=viz_share_link"
+                            height={450}
+                            // width={350}
+                            toolbar="bottom"
+                            hideTabs="true"
+                            hideToolbar="true"
+                        />
+                        </Card>
+                    </Col>
 
-                eventHandlers = { 
-                    new Map([
-                        ['loaded', function () {console.log('Report loaded');}],
-                        ['rendered', function () {console.log('Report rendered');}],
-                        ['error', function (event) {console.log(event.detail);}]
-                    ])
-                }
-                    
-                cssClassName = { "report-style-class" }
+                    <Col flex={"auto"} style={{margin: "0 5px"}}>
+                    <Card size="small" title={<div style={{fontSize: "1.2em"}}>Education</div>} style={{borderWidth: "2px"}} type='inner'>
+                        <Tableau
+                            vizUrl="https://public.tableau.com/views/Dashboard-edu/Edu?:language=en-US&:display_count=n&:origin=viz_share_link"
+                            height={450}
+                            // width={350}
+                            toolbar="bottom"
+                            hideTabs="true"
+                            hideToolbar="true"
+                        />
+                    </Card>
+                    </Col>
+                </Row>
 
-                getEmbeddedComponent = { (embeddedReport) => {
-                    this.report = embeddedReport;
-                }}
-            /> */}
-            </div>
+                <br></br>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Gender/Age Range</div>} style={{borderWidth: "2px"}} type='inner'>
+                    <Tableau
+                        vizUrl="https://public.tableau.com/views/Dashboard-genderage/GenderAge?:language=en-US&:display_count=n&:origin=viz_share_link"
+                        height={350}
+                        // width={1000}
+                        toolbar="bottom"
+                        hideTabs="true"
+                        hideToolbar="true"
+                    />
+                </Card >
+            </div>        
         </QueueAnim>
     </div>
   )

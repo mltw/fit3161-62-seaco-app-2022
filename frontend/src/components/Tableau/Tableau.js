@@ -57,7 +57,7 @@ function Tableau(props) {
             articleStyle={articleStyle}
             vizUrl={props.vizUrl}
             height={props.height}
-            width={200}  
+            width={props.width || 250}  
             hideTabs={props.hideTabs}
             device={props.device}
             toolbar={props.toolbar}
