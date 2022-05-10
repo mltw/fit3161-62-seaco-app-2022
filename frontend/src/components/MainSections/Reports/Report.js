@@ -1,6 +1,4 @@
 import React from 'react'
-import { Row, Statistic, Card, Col } from 'antd';
-import { StyledCard } from '../../Styled';
 import { useParams } from "react-router-dom";
 import Individual from './Individual';
 import Household from './Household';
