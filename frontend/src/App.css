@@ -43,22 +43,6 @@
   flex-flow: nowrap !important;
 }
 
-@import 'antd/dist/antd.css';
-
-.Red {background: red; color: white; width: 200px;}
-.Green {background: green; color: white; width: 200px;}
-.Blue {background: blue; color: white; width: 200px;}
-
-.column {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-@media screen and (max-width: 750px) {
-  .column {
-    flex: 50% !important;
-    margin-top: 10px;
-    margin-right: 5px !important;
-    margin-left: 5px !important;
-  }
+h1 {
+  font-size: 25px;
 }

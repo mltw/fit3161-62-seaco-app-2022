@@ -24,10 +24,18 @@ const StyledCard = styled(Card)`
     // background: rgba(0, 0, 0, 0.05);
     margin: 5px 0;
     borderRadius: 15px;
-    min-width: 280px;
+    min-width: 230px;
+
+    @media screen and (max-width: 1065px) {
+        min-width: 280px;
+    }
+
+    @media screen and (max-width: 860px) {
+        min-width: 300px;
+    }
 
     @media screen and (max-width: 450px) {
-        min-width: 150px;
+        min-width: 200px;
     }
 `
 
