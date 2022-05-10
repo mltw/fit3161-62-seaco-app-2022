@@ -1,6 +1,6 @@
 import React from 'react'
-import { Row, Statistic, Card, Col } from 'antd';
-import { StyledCard } from '../../Styled';
+import { Row, Card, Col } from 'antd';
+import Tableau from '../../Tableau/Tableau';
 
 export default function Individual() {
 
@@ -9,37 +9,32 @@ export default function Individual() {
       <h1 style={{textAlign: "center", fontSize: "25px"}}>Individual Health Report</h1>
       <hr></hr>
       <br></br>
-      {/* justify="space-around"  */}
-      <Row justify="space-around" style={{padding: "0 10px"}}>
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
-                    <h3>Title Individual</h3>
-                    <div>
-                      Tableau chart here
-                    </div>
-                {/* </Card> */}
-            </StyledCard>
-
-            <StyledCard bordered={false}>
-                   <h3>Title 2</h3>
-                    <div>
-                      Tableau chart here dlfnad;iofshdf;uioab;u
-                    </div>
-            </StyledCard>
-        </Row>
-        <Row justify='center' style={{marginTop: "20px", padding: "0 10px"}}>
-          <Col flex="auto">
-          <Card bordered={false} style={{border: "2px solid black"}}>
-                {/* <Card bordered={false}> */}
-                    <h3>Title 3</h3>
-                    <div>
-                      Tableau chart here
-                    </div>
-                {/* </Card> */}
-            </Card>
-          </Col>
-        
-        </Row>
+      <Row >
+            <Col flex={"auto"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among Malay participants</div>} style={{borderWidth: "2px"}} type='inner'>
+                <Tableau
+                    vizUrl="https://public.tableau.com/shared/BFCYD58RZ?:display_count=n&:origin=viz_share_link"
+                    height={350}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                />
+                </Card>
+            </Col>
+            <Col flex={"auto"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among Chinese participants</div>} style={{borderWidth: "2px"}} type='inner'>
+                {/* <Tableau
+                    vizUrl="https://public.tableau.com/views/Individualcharts-diseaseEth1/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                    height={350}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                /> */}
+                </Card>
+            </Col>
+        </Row>      
     </div>
   )
 }

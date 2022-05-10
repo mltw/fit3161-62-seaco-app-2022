@@ -1,6 +1,6 @@
 import React from 'react'
-import { Row, Statistic, Card, Col } from 'antd';
-import { StyledCard } from '../../Styled';
+import { Row, Card, Col } from 'antd';
+import Tableau from '../../Tableau/Tableau';
 
 export default function Physical() {
 
@@ -9,36 +9,50 @@ export default function Physical() {
       <h1 style={{textAlign: "center", fontSize: "25px"}}>Physical Report</h1>
       <hr></hr>
       <br></br>
-      {/* justify="space-around"  */}
-      <Row justify="space-around" style={{padding: "0 10px"}}>
-            <StyledCard bordered={false}>
-                {/* <Card bordered={false}> */}
-                    <h3>Title Individual</h3>
-                    <div>
-                      Tableau chart here
-                    </div>
-                {/* </Card> */}
-            </StyledCard>
+      <Row >
+            <Col flex={"auto"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Intensity / Age Group</div>} style={{borderWidth: "2px"}} type='inner'>
+                <Tableau
+                    vizUrl="https://public.tableau.com/views/Physicalcharts-ageintensity/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                    height={450}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                />
+                </Card>
+            </Col>
+            <Col flex={"300px"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Remarks</div>} style={{borderWidth: "2px"}} type='inner'>
+                {/* <Tableau
+                    vizUrl="https://public.tableau.com/views/Individualcharts-diseaseEth1/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                    height={350}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                /> */}
+                <div>
+                    Activities of type 'moderate' include sports, fitness and recreational.
+                </div>
+                </Card>
 
-            <StyledCard bordered={false}>
-                   <h3>Title 2</h3>
-                    <div>
-                      Tableau chart here dlfnad;iofshdf;uioab;u
-                    </div>
-            </StyledCard>
-        </Row>
-        <Row justify='center' style={{marginTop: "20px", padding: "0 10px"}}>
-          <Col flex="auto">
-          <Card bordered={false} style={{border: "2px solid black"}}>
-                {/* <Card bordered={false}> */}
-                    <h3>Title 3</h3>
-                    <div>
-                      Tableau chart here
-                    </div>
-                {/* </Card> */}
-            </Card>
-          </Col>
-        
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px", marginTop:"10px"}} type='inner'>
+                {/* <Tableau
+                    vizUrl="https://public.tableau.com/views/Individualcharts-diseaseEth1/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                    height={350}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                /> */}
+                <div>
+                    <p>Participants below 18 perform the most vigorous activities.</p>
+                    <p>Adults of age 45~60 perform the most activities of moderate intense , which is then followed 
+                    by elderlies of age above 60. The main type of activity is work.</p>
+                </div>
+                </Card>
+            </Col>
         </Row>
     </div>
   )
