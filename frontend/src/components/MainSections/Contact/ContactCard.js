@@ -18,13 +18,13 @@ export default function ContactCard() {
         source.current = 'https://www.monash.edu.my/seaco/about-us/seaco-staff#Mohd_Roshidi_Ismail_Statistician'
         img.current = c1
         about.current = "Roshidi is a Statistician at SEACO. His PhD research in ‘Measuring Cancer Awareness’ in Malaysia and his skills to analyse, interpret data and draw conclusions, attracted SEACO’s attention. He also has a Master’s in Medical Science in Public Health (MMedSc) from University Malaya, and a Bachelor’s in Medical Science (BMedSc) from the University of Aberdeen, United Kingdom. He is experienced in lecturing, tutoring and facilitating biostatistics and epidemiology courses at postgraduate and undergraduate levels."
-        email.current = ""
+        email.current = "mohd.roshidi@monash.edu"
     }
     else if (subSection === 'c2'){
         source.current = 'https://www.monash.edu.my/seaco/about-us/seaco-staff#Norliza_Mat_IT_Executive_Database'
         img.current = c2
         about.current = "Norliza is an IT Executive at SEACO. She graduated from University Tun Hussein Onn with a Bachelor’s in Information Technology, majoring in Information Systems. She previously joined Xybase MSC as a Software Engineer in 2012. She has been with SEACO since November 2015."
-        email.current = ""
+        email.current = "norliza.mat@monash.edu"
     }
 
     return (
