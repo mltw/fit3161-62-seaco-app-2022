@@ -1,40 +1,71 @@
 import React from 'react'
 import { Row, Card, Col } from 'antd';
-import { StyledCard } from '../../Styled';
+import Tableau from '../../Tableau/Tableau';
+import QueueAnim from 'rc-queue-anim';
 
 export default function Household() {
 
   return (
     <div>
-      <h1 style={{textAlign: "center", fontSize: "25px"}}>Household Health Report</h1>
-      <hr></hr>
-      <br></br>
-      <Row justify="space-around" style={{padding: "0 10px"}}>
-            <StyledCard bordered={false}>
-                <h3>Title Individual</h3>
+      <QueueAnim 
+            delay={300} 
+            duration={600} 
+            type='left'
+            className="queue-simple"> 
+            <h1 key='title' style={{textAlign: "center", fontSize: "25px"}}>Household Health Reports</h1>
+            <hr key='line'></hr>
+            <br></br>
+      </QueueAnim>
+      <QueueAnim 
+            delay={600} 
+            duration={600} 
+            type='right'
+            className="queue-simple"> 
+        <Row key='chart1'>
+            <Col flex={"auto"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among households</div>} style={{borderWidth: "2px"}} type='inner'>
+                <Tableau
+                    vizUrl="https://public.tableau.com/views/Householdcharts-disease16522/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link"
+                    height={450}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                />
+                </Card>
+            </Col>
+            <Col flex={"300px"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
                 <div>
-                    Tableau chart here
+                    <p>The chart shows the 5  most common diseases among all households, with hypertension being the most common one, appearing in 6456 households.</p>
                 </div>
-            </StyledCard>
-
-            <StyledCard bordered={false}>
-                   <h3>Title 2</h3>
-                    <div>
-                      Tableau chart here dlfnad;iofshdf;uioab;u
-                    </div>
-            </StyledCard>
+                </Card>
+            </Col>
         </Row>
-        <Row justify='center' style={{marginTop: "20px", padding: "0 10px"}}>
-          <Col flex="auto">
-          <Card bordered={false} style={{border: "2px solid black"}}>
-                <h3>Title 3</h3>
+        <br></br>
+        <Row key='chart2'>
+            <Col flex={"auto"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among households</div>} style={{borderWidth: "2px"}} type='inner'>
+                <Tableau
+                    vizUrl="https://public.tableau.com/views/Householdcharts-disease16522/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link"
+                    height={450}
+                    // width={350}
+                    toolbar="bottom"
+                    hideTabs="true"
+                    hideToolbar="true"
+                />
+                </Card>
+                <br></br>
+            </Col>
+            <Col flex={"300px"} style={{margin: "0 5px"}}>
+                <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
                 <div>
-                    Tableau chart here
+                    <p>The chart shows the 5  most common diseases among all households, with hypertension being the most common one, appearing in 6456 households.</p>
                 </div>
-            </Card>
-          </Col>
-        
+                </Card>
+            </Col>
         </Row>
+      </QueueAnim>
     </div>
   )
 }

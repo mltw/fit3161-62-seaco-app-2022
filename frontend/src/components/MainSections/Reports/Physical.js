@@ -1,15 +1,27 @@
 import React from 'react'
 import { Row, Card, Col } from 'antd';
 import Tableau from '../../Tableau/Tableau';
+import QueueAnim from 'rc-queue-anim';
 
 export default function Physical() {
 
   return (
     <div>
-      <h1 style={{textAlign: "center", fontSize: "25px"}}>Physical Report</h1>
-      <hr></hr>
-      <br></br>
-        <Row >
+        <QueueAnim 
+            delay={300} 
+            duration={600} 
+            type='left'
+            className="queue-simple"> 
+            <h1 key='title' style={{textAlign: "center", fontSize: "25px"}}>Physical Reports</h1>
+            <hr key='line'></hr>
+            <br></br>
+      </QueueAnim>
+      <QueueAnim 
+            delay={600} 
+            duration={600} 
+            type='right'
+            className="queue-simple"> 
+        <Row key='chart1'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Intensity / Age Group / Type of Activities</div>} style={{borderWidth: "2px"}} type='inner'>
                 <Tableau
@@ -33,7 +45,7 @@ export default function Physical() {
             </Col>
         </Row>
         <br></br>
-        <Row >
+        <Row key='chart2'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Marital Status / Type of Activities</div>} style={{borderWidth: "2px"}} type='inner'>
                 <Tableau
@@ -61,7 +73,7 @@ export default function Physical() {
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
                 <div>
                     <p>We can see that despite marital status, most activities performed are still work-related.</p>
-                    <p>However, people who are married and living together tend to spend lesser time on sports  fitness and 
+                    <p>However, people who are married and living together tend to spend lesser time on sports, fitness and 
                         recreational activites (only <b>5.25%</b> of all married participants), as compared to those who are single 
                         or not living together with their spouses (<b>12.53%</b>). </p>
                 </div>
@@ -69,7 +81,7 @@ export default function Physical() {
             </Col>
         </Row>
         <br></br>
-        <Row >
+        <Row key='chart3'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Education Level / Recreational Activities</div>} style={{borderWidth: "2px"}} type='inner'>
                 <Tableau
@@ -92,6 +104,7 @@ export default function Physical() {
                 </Card>
             </Col>
         </Row>
+        </QueueAnim>
     </div>
   )
 }
