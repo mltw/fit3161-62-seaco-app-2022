@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Modal } from 'antd';
 import logo from "../logo.png";
 import {
-  DesktopOutlined,
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
   MenuOutlined,
-  LineChartOutlined
+  LineChartOutlined,
+  ExclamationCircleOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { signOutUser } from '../actions';
@@ -77,11 +77,6 @@ function Main(props) {
                     </Link>
                 </Menu.Item>
 
-                {/* <Menu.Item key="reports" icon={<DesktopOutlined />}>
-                    <Link to="reports">
-                        Reports
-                    </Link>
-                </Menu.Item> */}
                 <SubMenu key="reports" icon={<LineChartOutlined />} title="Reports">
                     <Menu.Item key="individual" >
                         <Link to="reports/individual">
@@ -127,34 +122,28 @@ function Main(props) {
                     </div>
                     
                     <SubMenu key="sub1" title={username} icon={<UserOutlined style={{fontSize: "22px"}}/>} style={{marginLeft:'auto', fontSize: "15px"}}>
-                        <Menu.Item key="1" onClick={signOutUser}>Sign Out</Menu.Item>
+                        <Menu.Item key="1" onClick={()=>{
+                                Modal.confirm({
+                                title: 'Are you sure you want to sign out?',
+                                icon: <ExclamationCircleOutlined />,
+                                okText: 'Yes',
+                                cancelText: 'Cancel',
+                                onOk() {signOutUser()},
+                                onCancel() {console.log('cancel')}
+                              });
+                            }}>
+                                Sign Out
+                        </Menu.Item>
                     </SubMenu>
                 </Menu>    
-                {/* <div style={{textAlign:"right", marginRight: "16px"}}>
-                    <Dropdown 
-                        overlay={
-                            <Menu>
-                                <Menu.Item style={{marginLeft:'auto'}}>
-                                    Sign Out <FontAwesomeIcon icon={faCircleUser} /><i class="fa-solid fa-circle-user"></i>
-                                </Menu.Item>
-                            </Menu>}
-                    >
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            {username} <UserOutlined />
-                        </a>
-                    </Dropdown>
-                </div> */}
-
             </Header>
             <Content style={{ margin: '0 16px' }}>
                 <h1 style={{margin: "16px 0px"}}>
                     Hello, {username}!
                 </h1>
-
                 <div style={{ padding: 24, minHeight: 360, background: "#fff" }}>
                     <Outlet />
                 </div>
-                
             </Content>
             <Footer style={{ textAlign: 'center' }}>SEACO x Team MA 16</Footer>
         </Layout>
