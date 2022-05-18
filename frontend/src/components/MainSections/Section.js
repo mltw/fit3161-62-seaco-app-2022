@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
-import ContactCard from './Contact/ContactCard';
+import Contact from './Contact/Contact';
 import Dashboard from './Dashboard';
 import Report from './Reports/Report';
 import { Result } from 'antd';
@@ -16,7 +16,7 @@ function Section() {
         case 'reports':
             return <Report />
         case 'contacts':
-            return <ContactCard />
+            return <Contact />
 
         default:
             return <Result

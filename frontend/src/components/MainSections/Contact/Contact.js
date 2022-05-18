@@ -6,7 +6,7 @@ import c2 from "./c2.jpg"
 import QueueAnim from 'rc-queue-anim';
 
 
-export default function ContactCard() {
+export default function Contact() {
     const { subSection } = useParams();
 
     const img = useRef(null)
