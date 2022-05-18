@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { Layout, Menu, Modal } from 'antd';
+import { Layout, Menu, Modal, BackTop } from 'antd';
 import logo from "../logo.png";
 import {
   PieChartOutlined,
@@ -48,6 +48,7 @@ function Main(props) {
 
     return (
     <Layout style={{ minHeight: '100vh' }}>
+        <BackTop />
         <Sider 
             collapsible collapsed={collapsed} 
             onCollapse={setCollapsed}>
