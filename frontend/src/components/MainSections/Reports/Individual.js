@@ -49,7 +49,7 @@ export default function Individual() {
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among Chinese participants</div>} style={{borderWidth: "2px"}} type='inner'>
               <Tableau
-                vizUrl="https://public.tableau.com/views/Individualcharts-diseasechinese17522/Dashboard3?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
+                vizUrl="https://public.tableau.com/views/Individualcharts-diseasechinese17522_16529744913220/Dashboard3?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
                 height={450}
                 // width={350}
                 toolbar="bottom"
