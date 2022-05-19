@@ -114,7 +114,7 @@ def create_temp_user():
 
     msg = Message(
         'SEACO Web app registration', 
-        sender ='marcus.limtauwhang961@gmail.com', 
+        sender ='seaco2022ma16@gmail.com', 
         recipients = ['seaco2022ma16@gmail.com'])
     msg.html=f"A staff with email: {email} has signed up for an account. <br></br> \
                 <button><a href=`http://localhost:3000/approve/?id={email_id}`>Click this button to approve.</a></button>"
