@@ -199,14 +199,14 @@ def fetch_code_and_send_email(email_id):
         msg = Message(
             'Complete your SEACO Web App Registration', 
             sender ='seaco2022ma16@gmail.com', 
-            recipients = ['mlim0032@student.monash.edu'])
+            recipients = [temp_user.email])
         msg.html=f"Your registration is approved.<br></br> \
                     Your verification code is <b>{code}</b>. Please \
                     <button><a href=`http://localhost:3000/signup/verified/?id={email_id}`>click here</a></button> to complete your registration."
         mail.send(msg)
         return {"UserTemp": format_temp_user(temp_user)}
     except:
-        return "Error in fetching code and sending emai"
+        return "Error in fetching code and sending email"
 
 # delete an event (not used for now)
 @app.route('/users/signup/<email_id>', methods=['DELETE'])
