@@ -33,6 +33,7 @@ export default function Household() {
                     hideToolbar="true"
                 />
                 </Card>
+                <br></br>
             </Col>
             <Col flex={"300px"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -40,9 +41,9 @@ export default function Household() {
                     <p>The chart shows the 5 most common diseases among all households, with hypertension being the most common one, appearing in 1764 households.</p>
                 </div>
                 </Card>
+                <br></br>
             </Col>
         </Row>
-        <br></br>
         <Row key='chart2'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>% of disease occurrences in a household</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -73,6 +74,7 @@ export default function Household() {
                     <p>This may be due to genetics of family members, or lifestyle habits within a household.</p>
                 </div>
               </Card>
+              <br></br>
             </Col>
         </Row>
         <Row key='chart3'>
@@ -97,6 +99,7 @@ export default function Household() {
                       but factors may include family genetics, body condition, diet etc.</p>
                 </div>
               </Card>
+              <br></br>
             </Col>
         </Row>
       </QueueAnim>

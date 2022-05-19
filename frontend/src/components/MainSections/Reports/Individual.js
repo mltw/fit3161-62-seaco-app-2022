@@ -33,6 +33,7 @@ export default function Individual() {
                 hideToolbar="true"
                 />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among Indian participants</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -45,6 +46,7 @@ export default function Individual() {
                 hideToolbar="true"
               />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among Chinese participants</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -57,9 +59,9 @@ export default function Individual() {
                 hideToolbar="true"
               />
             </Card>
+            <br></br>
           </Col>
         </Row>    
-        <br></br>
         <Row key='chart2'>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among all participants (Age & Ethnicity)</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -72,6 +74,7 @@ export default function Individual() {
                   hideToolbar="true"
               />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"300px"} style={{margin: "0 5px"}}>
               <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -81,9 +84,9 @@ export default function Individual() {
                   <p>Asthma is suffered most by those below 18. Meanwhile, diabetes and vision problems consist mostly of people aged 45 to 60.</p>
               </div>
               </Card>
+              <br></br>
           </Col>
         </Row>  
-        <br></br>
         <Row key='chart3'>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among all participants (Gender & Ethnicity)</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -96,6 +99,7 @@ export default function Individual() {
                     hideToolbar="true"
                 />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"300px"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -103,9 +107,9 @@ export default function Individual() {
               <p>The top 5 diseases consist moslty of female participants, while vision problem and diabetes occur more equally in both male and female participants.</p>    
             </div>
             </Card>
+            <br></br>
           </Col>
         </Row>
-        <br></br>
         <Row key='chart4'>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among all participants (Education & Ethnicity)</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -118,6 +122,7 @@ export default function Individual() {
                   hideToolbar="true"
               />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"300px"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -128,9 +133,9 @@ export default function Individual() {
                 </p>
               </div>
             </Card>
+            <br></br>
           </Col>
         </Row>  
-        <br></br>
         <Row key='chart5'>
           <Col flex={"auto"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Top 5 diseases among all participants (Income & Ethnicity)</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -143,6 +148,7 @@ export default function Individual() {
                   hideToolbar="true"
               />
             </Card>
+            <br></br>
           </Col>
           <Col flex={"300px"} style={{margin: "0 5px"}}>
             <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -153,6 +159,7 @@ export default function Individual() {
                   the development of the diseases.</p>
               </div>
             </Card>
+            <br></br>
           </Col>
         </Row>  
       </QueueAnim>

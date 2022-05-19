@@ -33,6 +33,7 @@ export default function Physical() {
                     hideToolbar="true"
                 />
                 </Card>
+                <br></br>
             </Col>
             <Col flex={"300px"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -42,9 +43,9 @@ export default function Physical() {
                     This is then followed by those above 60, and subsequently those aged 30 to 45. </p>
                 </div>
                 </Card>
+                <br></br>
             </Col>
         </Row>
-        <br></br>
         <Row key='chart2'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Marital Status / Type of Activities</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -57,6 +58,7 @@ export default function Physical() {
                     hideToolbar="true"
                 />
                 </Card>
+                <br></br>
             </Col>
             <Col flex={"300px"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Remarks</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -78,9 +80,9 @@ export default function Physical() {
                         or not living together with their spouses (<b>12.53%</b>). </p>
                 </div>
                 </Card>
+                <br></br>
             </Col>
         </Row>
-        <br></br>
         <Row key='chart3'>
             <Col flex={"auto"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Education Level / Recreational Activities</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -93,6 +95,7 @@ export default function Physical() {
                     hideToolbar="true"
                 />
                 </Card>
+                <br></br>
             </Col>
             <Col flex={"300px"} style={{margin: "0 5px"}}>
                 <Card size="small" title={<div style={{fontSize: "1.2em"}}>Observations</div>} style={{borderWidth: "2px"}} type='inner'>
@@ -102,6 +105,7 @@ export default function Physical() {
                     <p>However, participants aged 60 and above who receive lesser/no education tend to do more fitness and recreational activities.</p>
                 </div>
                 </Card>
+                <br></br>
             </Col>
         </Row>
         </QueueAnim>
