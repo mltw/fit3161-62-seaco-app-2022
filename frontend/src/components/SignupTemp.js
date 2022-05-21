@@ -58,12 +58,6 @@ class SignupTemp extends Component {
                         placeholder="Monash Email" />
                 </Form.Item>
 
-                
-
-                {/* <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item> */}
-
                 <Button style={{marginBottom: "10px" }} type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
                     Request Registration
                     <Tooltip title="An email will be sent to you once the admin approves the registration. Kindly follow the steps there to complete the sign up process.">

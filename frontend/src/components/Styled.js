@@ -3,11 +3,11 @@ import { Row, Col, Card } from 'antd';
 import background from '../background.jpg';
 
 const StyledRow = styled(Row)`
-  min-height: 100vh;
-  background-image: url(${background});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    min-height: 100vh;
+    background-image: url(${background});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 `;
 
 const StyledCol = styled(Col)`

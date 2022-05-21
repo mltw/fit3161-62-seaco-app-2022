@@ -30,8 +30,6 @@ function Section() {
 
 export default connect(state => ({
     // props
-    // username: state.userValidation.username,
 }), {
     // actions
-    // signOutUser
 })(Section);

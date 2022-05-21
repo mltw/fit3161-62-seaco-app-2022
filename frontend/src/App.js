@@ -43,11 +43,9 @@ function App(props) {
         validateUser
     } = props
 
-
     console.log(!valid, localStorage.getItem("token") , (localStorage.getItem("token") !== "" || localStorage.getItem("token") !== null))
     if (localStorage.getItem("token") !== null && !valid && localStorage.getItem("token") !== "" ){
         validateUser({email: localStorage.getItem("email"), password:""})
-        // below the return can return a loading page
         return <></>
     }
     else {

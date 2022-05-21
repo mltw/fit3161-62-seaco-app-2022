@@ -28,7 +28,6 @@ export default function Contact() {
     }
 
     return (
-        // <Row justify="space-around" align="middle">
         <Row className='contact-card-text'>
             <Col flex="180px">
                 <QueueAnim 

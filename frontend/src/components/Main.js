@@ -18,10 +18,6 @@ import {
     Outlet 
 } from 'react-router-dom';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCircleUser,  } from '@fortawesome/free-regular-svg-icons';
-// import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -43,7 +39,6 @@ function Main(props) {
     else if (section === 'reports')
         menuOpenKey = ['reports']
 
-
     console.log("in Main and section, subSection is", section, subSection)
 
     return (
@@ -62,7 +57,6 @@ function Main(props) {
                     <div style={{fontSize: '16px'}}>
                         <MenuOutlined/> &nbsp;
                         SEACO, Monash
-                        {/* <img src={logo} alt="Logo" style={{width:"40%", objectFit:"contain"}}/> */}
                     </div> }
             </div>
             

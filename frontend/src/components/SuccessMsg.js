@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { fetchCodeAndSendEmail } from '../actions';
 import { LoadingOutlined } from '@ant-design/icons';
 
-// TODO: if email is not a valid email, display none
 let params = new URLSearchParams(document.location.search);
 const emailId = params.get("id"); 
 
