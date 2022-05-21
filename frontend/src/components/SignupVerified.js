@@ -90,7 +90,7 @@ class SignupVerified extends Component {
                     <Input 
                         disabled={userSignUpEmail ? true : false}
                         prefix={<MailOutlined className="site-form-item-icon" />} 
-                        placeholder="Monash Email" />
+                        placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                     // label = "Username"

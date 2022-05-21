@@ -55,7 +55,7 @@ class SignupTemp extends Component {
                     <Input 
                         
                         prefix={<MailOutlined className="site-form-item-icon" />} 
-                        placeholder="Monash Email" />
+                        placeholder="Email" />
                 </Form.Item>
 
                 <Button style={{marginBottom: "10px" }} type="primary" shape="round" htmlType="submit" className="login-form-button" size="large">
