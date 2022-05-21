@@ -157,8 +157,8 @@ def create_temp_user():
                 <button><a href=`http://localhost:3000/approve/?id={email_id}`>Click this button to approve.</a></button>"
     mail.send(msg)
 
-    return {"UserTemp": format_temp_user(temp_user)}
-
+    # return {"UserTemp": format_temp_user(temp_user)}
+    return {"UserTemp": "User created"}
 
 @app.route('/users/<email>', methods=['GET'])
 def get_user(email):

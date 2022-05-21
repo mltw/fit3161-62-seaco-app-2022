@@ -152,10 +152,10 @@ export const registerUserTemp = (userInput) => async (dispatch)  => {
             console.log("Code requested successfully.")
             message.destroy()
             Modal.success({
-                title: 'Code requested successfully.',
+                title: 'Registration requested successfully.',
                 content: (
                   <div>
-                    Once the admin approves your request, an email will be sent to you. Kindly follow the
+                    Once the admin approves your request, an email will be sent to you ({userInput.email}). Kindly follow the
                     steps there to complete the registration process.
                   </div>
                 ),

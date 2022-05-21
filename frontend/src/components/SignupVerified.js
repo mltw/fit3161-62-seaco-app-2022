@@ -82,8 +82,9 @@ class SignupVerified extends Component {
                             message: 'Please input your Email!',
                         },
                         {
-                            pattern :/^[\w-.]+@(student\.)?(monash\.edu)$/,
-                            message: "Please use your Monash email."
+                            // pattern :/^[\w-.]+@(student\.)?(monash\.edu)$/,
+                            pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$|^(seaco2022ma16@gmail.com)$/,
+                            message: "Please enter a valid email."
                         }
                     ]}>
                     <Input 
