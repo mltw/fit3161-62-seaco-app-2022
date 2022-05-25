@@ -114,7 +114,11 @@ class SignupVerified extends Component {
                             required: true,
                             message: 'Please input your password!',
                         },
-                        { min: 8, message: 'Password is a minimum of 8 characters.' }
+                        { min: 8, message: 'Password is a minimum of 8 characters.' },
+                        {
+                            pattern: /^\S+$/,
+                            message: "No whitespaces allowed."
+                        },
                     ]}
                 >
                     <Input.Password
@@ -132,7 +136,11 @@ class SignupVerified extends Component {
                             required: true,
                             message: 'Please confirm your password!',
                         },
-                        { min: 8, message: 'Password is a minimum of 8 characters.' }
+                        { min: 8, message: 'Password is a minimum of 8 characters.' },
+                        {
+                            pattern: /^\S+$/,
+                            message: "No whitespaces allowed."
+                        },
                     ]}
                 >
                     <Input.Password
