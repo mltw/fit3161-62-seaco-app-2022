@@ -9,6 +9,7 @@ import { message, Modal } from "antd";
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 
+// salt used for password hashing
 const salt = bcrypt.genSaltSync(10)
 
 const baseUrl = "http://localhost:5000"
@@ -47,10 +48,12 @@ export const validateUser = (userInput) => async (dispatch) => {
                 token: sessionToken
             });
 
-            // update db and local storage to store the current session token
-            localStorage.setItem("token", sessionToken)
-            localStorage.setItem("email", userInput.email)
-            await axios.put(`${baseUrl}/users/${userInput.email}/session-token`, {session_token: sessionToken})
+            // if it's a new sign in, update db and local storage to store the current session token
+            if (fetchedUser.password === userInputPasswordHashed){
+                localStorage.setItem("token", sessionToken)
+                localStorage.setItem("email", userInput.email)
+                await axios.put(`${baseUrl}/users/${userInput.email}/session-token`, {session_token: sessionToken})
+            }
         }
         else{
             dispatch({type: INVALID_USER, username: userInput.username, email: userInput.email});
@@ -62,13 +65,10 @@ export const validateUser = (userInput) => async (dispatch) => {
         dispatch({type: INVALID_USER, username: userInput.username, email: userInput.email});
         if (userInput.password.length > 0)
             message.error("No such user found.");
-    }
-        
-    console.log("in actions.js", userInput.username, userInput.password)
-    
+    } 
 }
 
-// used when the user signs up with the code
+// used when the user signs up with the 6-digit verification code
 export const registerAndValidateUser = (userInput) => async (dispatch) => {
     try {
         const data = await axios.get(`${baseUrl}/users/${userInput.email}`)
@@ -88,6 +88,7 @@ export const registerAndValidateUser = (userInput) => async (dispatch) => {
             try{
                 const fetchedTempUser = dataCode.data.UserTemp
 
+                // if password and confirm password match, and the code is same as in db, register the user
                 if (userInput.password === userInput.passwordConfirm &&
                     fetchedTempUser.code.toString() === userInput.code.toString()
                 ){
@@ -135,7 +136,32 @@ export const registerUserTemp = (userInput) => async (dispatch)  => {
         const data = await axios.get(`${baseUrl}/users/signup/${userInput.email}`)
 
         if (!data.data.UserTemp){
-            throw Error
+            // no such user with the email, we can safely register this user
+            try{
+                // generate random ID for email
+                const emailId = uuidv4().toString()
+
+                message.loading("Processing...", 0)
+
+                await axios.post(`${baseUrl}/users/signup`, {userInput, emailId: emailId})
+
+                // in frontend, destroy the 'Processing...' message and load the Modal
+                message.destroy()
+                Modal.success({
+                    title: 'Registration requested successfully.',
+                    content: (
+                      <div>
+                        Once the admin approves your request, an email will be sent to you ({userInput.email}). Kindly follow the
+                        steps there to complete the registration process.
+                      </div>
+                    ),
+                    onOk() {},
+                  });
+            }
+            catch (e){
+                console.log("Error in creating temp user", e)
+                message.error(e)
+            }
         }
         else{
             // if found a record with the same email, don't allow registration of this user
@@ -144,28 +170,7 @@ export const registerUserTemp = (userInput) => async (dispatch)  => {
         }   
     }
     catch (e) {
-        // no such user with the email, we can safely register this user
-        try{
-            const emailId = uuidv4().toString()
-            message.loading("Processing...", 0)
-            await axios.post(`${baseUrl}/users/signup`, {userInput, emailId: emailId})
-            console.log("Code requested successfully.")
-            message.destroy()
-            Modal.success({
-                title: 'Registration requested successfully.',
-                content: (
-                  <div>
-                    Once the admin approves your request, an email will be sent to you ({userInput.email}). Kindly follow the
-                    steps there to complete the registration process.
-                  </div>
-                ),
-                onOk() {},
-              });
-        }
-        catch (e){
-            console.log("Error in creating temp user", e)
-            message.error(e)
-        }
+        console.log("Error in registering temp user", e)
     }
 }
 
@@ -183,6 +188,7 @@ export const signOutUser = () => async (dispatch) => {
     }
 }
 
+// used when user completes sign up process. This method will fetch the email address from the db using the email ID 
 export const verifyRegisterLink = (emailId) => async (dispatch) => {
     try{
         const data = await axios.get(`${baseUrl}/users/signup/${emailId}/id`, emailId)
@@ -209,7 +215,7 @@ export const verifyRegisterLink = (emailId) => async (dispatch) => {
 export const fetchCodeAndSendEmail = (emailId) => async (dispatch) => {
     try {
         const data = await axios.get(`${baseUrl}/users/signup/${emailId}/send`, emailId)
-        // console.log("Email sent")
+
         if (data.data.UserTemp)
             dispatch({type: SEND_SUCCESSFUL, email: data.data.UserTemp.email})
         console.log("Email sent", data)
