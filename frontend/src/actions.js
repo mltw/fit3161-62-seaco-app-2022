@@ -63,8 +63,7 @@ export const validateUser = (userInput) => async (dispatch) => {
     catch (e){
         console.log("Error in fetching user", e);
         dispatch({type: INVALID_USER, username: userInput.username, email: userInput.email});
-        if (userInput.password.length > 0)
-            message.error("No such user found.");
+        message.error("No such user found.");
     } 
 }
 
@@ -208,6 +207,7 @@ export const verifyRegisterLink = (emailId) => async (dispatch) => {
         dispatch ({
             type: RETRIEVE_EMAIL_FAILED,
         })
+        message.error("Invalid email ID", 0)
     }
 }
 
